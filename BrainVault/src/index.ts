@@ -5,6 +5,8 @@ import { userRouter } from './Routes/userRoute';
 
 const app = express();
 
+app.use(express.json())
+
 dotenv.config();
 
 
@@ -14,7 +16,7 @@ app.get('/home', (req, res) => {
     })
 })
 
-app.use('/api/v1', userRouter);
+app.use('/api/v1/user', userRouter);
 
 
 app.listen(3000, () => {
