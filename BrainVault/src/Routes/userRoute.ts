@@ -1,4 +1,4 @@
-import express from "express";
+import { Router, Response, Request } from "express";
 import { userModel } from "../Schemas/userSchema";
 import mongoose, { Types } from "mongoose";
 import dotenv from "dotenv"
@@ -6,46 +6,46 @@ import jwt from "jsonwebtoken"
 import z, { string } from 'zod';
 import bcrypt from "bcrypt"
 
-const app = express()
+const userRouter = Router();
 
-const userRouter = express.Router();
+dotenv.config();
 
-dotenv.config()
+interface bodyT extends Request {
+    username: string,
+    fullname: string,
+    password: string
+};
 
-userRouter.post('/signup', async (req: any, res: any) => {
+
+userRouter.post('/signup', (req: bodyT, res: Response) => {
     //zod validation left
-    type bodyT = {
-        username: string,
-        fullname: string,
-        password: string
-    };
 
     const { username, fullname, password }: bodyT = req.body;
 
     const hashPass = bcrypt.hash(password, 5, (err, hash) => {
         if (!hash) {
-            return res.send({
+            res.send({
                 err: "hashing failed",
                 err1: err
-            })
+            });
         }
     })
 
     try {
-        const addData = await userModel.create({
+        const addData = userModel.create({
             username: username,
             fullname: fullname,
             password: hashPass
         });
     } catch (err) {
-        return res.send({
+        res.send({
             err: "error in adding data to db",
             err1: err
-        })
+        });
     }
 
 
-    return res.send({
+    res.send({
         msg: 'signup done'
     });
 
@@ -67,7 +67,7 @@ userRouter.post('/signin', async (req: any, res: any) => { //fix any
 
     const { username, password }: bodyT = req.body;
 
-    let secret: string | undefined | null = process.env.JWT_SECRET;
+    let secret: string = process.env.JWT_SECRET!;
 
     try {
         const check: checkT | null = await userModel.findOne({
