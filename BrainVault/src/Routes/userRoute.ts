@@ -1,16 +1,19 @@
 import express from "express";
 import { userModel } from "../Schemas/userSchema";
 import mongoose, { Types } from "mongoose";
+import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
-import z from 'zod';
+import z, { string } from 'zod';
 import bcrypt from "bcrypt"
 
 const app = express()
 
 const userRouter = express.Router();
 
+dotenv.config()
 
 userRouter.post('/signup', async (req: any, res: any) => {
+    //zod validation left
     type bodyT = {
         username: string,
         fullname: string,
@@ -43,14 +46,14 @@ userRouter.post('/signup', async (req: any, res: any) => {
 
 
     return res.send({
-        msg: 'signup page'
+        msg: 'signup done'
     });
 
 });
 
 
 
-userRouter.post('/signin', async (req, res) => {
+userRouter.post('/signin', async (req: any, res: any) => { //fix any
 
     interface bodyT {
         username: string,
@@ -64,16 +67,39 @@ userRouter.post('/signin', async (req, res) => {
 
     const { username, password }: bodyT = req.body;
 
+    let secret: string | undefined | null = process.env.JWT_SECRET;
+
     try {
         const check: checkT | null = await userModel.findOne({
             username: username
         });
 
-        if (check) {
-            const token = jwt.sign(check._id, 'kjskjsfdf',)
-        }
-    } catch (error) {
+        if (check && secret) {
+            const token = jwt.sign({ id: check._id }, secret);
 
+            if (token) {
+                return res.send({
+                    msg: "done the jwt generation",
+                    token: token
+                })
+            }
+            else {
+                return res.send({
+                    msg: "jwt generation failed",
+                })
+            }
+
+        }
+        else {
+            res.send({
+                err: "sorry we couldn't find your account"
+            })
+        }
+    } catch (err) {
+        return res.send({
+            err0: "can not find your acccount",
+            err1: err
+        })
     }
 });
 

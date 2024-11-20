@@ -25,7 +25,7 @@ app.listen(3000, () => {
 
 
 try {
-    mongoose.connect(`mongodb+srv://vyshakn:${process.env.DB_PASS}@cluster0.twxk2.mongodb.net/Brainvault`)
+    mongoose.connect(`mongodb+srv://vyshakn:${'4wjVz7hIUO1ZGznm'}@cluster0.twxk2.mongodb.net/Brainvault`)
 } catch (error) {
     console.log('mongodb connection failed', (error: Error | null) => {
         console.log(error ? 'db Connection failed' + error : 'Db connected successfully')
