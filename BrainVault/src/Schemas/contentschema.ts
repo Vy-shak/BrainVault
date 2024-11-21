@@ -3,12 +3,12 @@ import { string } from "zod";
 
 
 const contentSchema = new Schema({
-    cType: { type: string },
-    title: { type: string },
-    about: { type: string },
-    link: { type: string },
+    cType: { type: String },
+    title: { type: String },
+    about: { type: String },
+    link: { type: String },
     userId: { type: mongoose.Types.ObjectId, ref: 'user', required: true },
-    tag: [{ type: mongoose.Types.ObjectId }]
+    tag: [{ type: mongoose.Types.ObjectId, ref: 'tag' }]
 });
 
 

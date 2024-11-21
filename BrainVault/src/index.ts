@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import { userRouter } from './Routes/userRoute';
+import { contentRouter } from './Routes/content';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get('/home', (req, res) => {
 })
 
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/content', contentRouter);
 
 
 app.listen(3000, () => {

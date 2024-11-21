@@ -5,14 +5,17 @@ import { string } from "zod";
 
 dotenv.config()
 
-interface requestT extends Request {
-    id?: string
-}
 
+
+export interface requestT extends Request {
+    id: string
+}
 
 const authMiddleware = (req: requestT, res: Response, next: NextFunction) => {
 
+
     const header = req.headers['authtoken'];
+    console.log(header)
 
     const decoded: string | JwtPayload = jwt.verify(header as string, process.env.JWT_SECRET!);
 
@@ -22,8 +25,7 @@ const authMiddleware = (req: requestT, res: Response, next: NextFunction) => {
         })
     };
 
-
-    if (typeof decoded === "object" && decoded.id) {
+    if (typeof decoded === "object") {
         req.id = decoded.id;
     }
     else {
@@ -32,4 +34,6 @@ const authMiddleware = (req: requestT, res: Response, next: NextFunction) => {
 
     next();
 
-}
+};
+
+export { authMiddleware };
