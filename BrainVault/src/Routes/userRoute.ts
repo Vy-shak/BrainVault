@@ -10,17 +10,12 @@ const userRouter = Router();
 
 dotenv.config();
 
-interface bodyT extends Request {
-    username: string,
-    fullname: string,
-    password: string
-};
 
+userRouter.post('/signup', async (req: Request, res: Response): Promise<void> => {
 
-userRouter.post('/signup', (req: bodyT, res: Response) => {
-    //zod validation left
-
-    const { username, fullname, password }: bodyT = req.body;
+    const username: string = req.body.username;
+    const password: string = req.body.password;
+    const fullname: string = req.body.fullname;
 
     const hashPass = bcrypt.hash(password, 5, (err, hash) => {
         if (!hash) {
@@ -32,7 +27,7 @@ userRouter.post('/signup', (req: bodyT, res: Response) => {
     })
 
     try {
-        const addData = userModel.create({
+        const addData = await userModel.create({
             username: username,
             fullname: fullname,
             password: hashPass
@@ -44,10 +39,10 @@ userRouter.post('/signup', (req: bodyT, res: Response) => {
         });
     }
 
-
     res.send({
         msg: 'signup done'
     });
+    return
 
 });
 

@@ -6,20 +6,13 @@ import { Request, Response } from "express";
 const contentRouter = Router();
 
 
-interface contentRequest extends Request {
-    body: {
-        cType?: string,
-        title?: string,
-        about?: string,
-        link?: string,
-        id: string
-    }
-};
 
 
-
-contentRouter.post("/addContent", async (req: contentRequest, res: Response) => {
-    const { cType, title, about, link, id } = req.body
+contentRouter.post("/addContent", async (req: Request, res: Response) => {
+    const cType: string = req.body.cType;
+    const title: string = req.body.title;
+    const about: string = req.body.about;
+    const link: string = req.body.link;
 
     try {
         const upload = await contentmodel.create({

@@ -1,4 +1,4 @@
-import mongoose, { model, Schema, Types } from "mongoose";
+import mongoose, { model, Mongoose, Schema, Types } from "mongoose";
 import { string } from "zod";
 
 
@@ -7,8 +7,8 @@ const contentSchema = new Schema({
     title: { type: string },
     about: { type: string },
     link: { type: string },
-    userId: { type: mongoose.Types.ObjectId, ref: 'user', required: true }
-    tag: [{ type: string }]
+    userId: { type: mongoose.Types.ObjectId, ref: 'user', required: true },
+    tag: [{ type: mongoose.Types.ObjectId }]
 });
 
 
