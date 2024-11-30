@@ -6,7 +6,7 @@ import Pdf from "./Pdf";
 import Photoshop from "./Photoshop";
 import Present from "./Present";
 import Sketchupicon from "./Sketchupicon";
-import Images from "./images";
+import Images from "./Images";
 
 
 export {

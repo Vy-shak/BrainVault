@@ -11,11 +11,11 @@ const menuCss = {
     normal: 'py-2 px-4'
 }
 
-const defaultCss = 'flex justify-center items-center'
+const defaultCss = 'flex justify-center items-center text-black text-sm space-x-2'
 
 function Sideitem(props: sideProp) {
     return (
-        <div className={`${defaultCss} ${menuCss[props.type]} text-black text-sm`}>
+        <div className={`${defaultCss} ${menuCss[props.type]} ${defaultCss}`}>
             <div>
                 {props.startIcon}
             </div>
