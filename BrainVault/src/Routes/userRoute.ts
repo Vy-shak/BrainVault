@@ -11,20 +11,35 @@ const userRouter = Router();
 dotenv.config();
 
 
+
 userRouter.post('/signup', async (req: Request, res: Response): Promise<void> => {
 
     const username: string = req.body.username;
     const password: string = req.body.password;
     const fullname: string = req.body.fullname;
 
-    const hashPass = bcrypt.hash(password, 5, (err, hash) => {
-        if (!hash) {
-            res.send({
-                err: "hashing failed",
-                err1: err
-            });
-        }
-    })
+    if (!password) {
+        res.status(401).send({
+            err: "password is not correct"
+        });
+        return
+    };
+
+    const checkdupli = await userModel.findOne({
+        username: username
+    });
+
+    if (checkdupli) {
+        res.send({
+            err: "this username is taken"
+        });
+        return
+    }
+
+
+
+    const hashPass = await bcrypt.hash(password, 5);
+    console.log(hashPass)
 
     try {
         const addData = await userModel.create({
@@ -33,10 +48,11 @@ userRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
             password: hashPass
         });
     } catch (err) {
-        res.send({
+        res.status(406).send({
             err: "error in adding data to db",
             err1: err
         });
+        return
     }
 
     res.send({
@@ -56,18 +72,25 @@ userRouter.post('/signin', async (req: any, res: any) => { //fix any
     };
 
     interface checkT extends bodyT {
-        _id: Types.ObjectId,
+        _id: mongoose.Types.ObjectId,
         fullname: string
     }
 
     const { username, password }: bodyT = req.body;
+    console.log(username)
 
     let secret: string = process.env.JWT_SECRET!;
 
     try {
         const check: checkT | null = await userModel.findOne({
-            username: username
+            username: username,
         });
+
+        console.log(check)
+        if (check) {
+            const passCheck = await bcrypt.compare(password, check.password);
+            console.log(passCheck, 'hello')
+        }
 
         if (check && secret) {
             const token = jwt.sign({ id: check._id }, secret);
@@ -79,20 +102,15 @@ userRouter.post('/signin', async (req: any, res: any) => { //fix any
                 })
             }
             else {
-                return res.send({
+                return res.status(406).send({
                     msg: "jwt generation failed",
                 })
             }
 
         }
-        else {
-            res.send({
-                err: "sorry we couldn't find your account"
-            })
-        }
     } catch (err) {
-        return res.send({
-            err0: "can not find your acccount",
+        return res.status(406).send({
+            err0: "Wrong credential",
             err1: err
         })
     }

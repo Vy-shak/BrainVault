@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import { userRouter } from './Routes/userRoute';
 import { contentRouter } from './Routes/content';
+import { shareRouter } from './Routes/Share';
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.get('/home', (req, res) => {
 
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/content', contentRouter);
-
+app.use('/api/v1/share', shareRouter)
 
 app.listen(3000, () => {
     console.log('app started on port 3000')
