@@ -4,13 +4,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-declare module 'express-serve-static-core' {
-    namespace Express {
-        interface Request {
-            id?: string;
-        }
-    }
-}
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const header = req.headers['authtoken'];
@@ -28,15 +21,18 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
             req.id = decoded.id;
             next();
         } else {
-            return res.status(401).json({
+            res.status(401).send({
                 err: "Invalid token"
             });
+            return
         }
     } catch (error) {
-        return res.status(401).json({
+        res.status(401).send({
             err: "Authentication failed",
             details: error
         });
+
+        return
     }
 };
 

@@ -73,7 +73,7 @@ shareRouter.get('/show/:shareLink', async (req, res) => {
 
         if (item) {
             try {
-                const content = await contentmodel.findOne({
+                const content = await contentmodel.find({
                     userId: item.userId
                 });
 
