@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        Bblue500: '#5046E4',
-        Bblue900: '#EFF3FF'
+        Bblue500: '#4B1EC6',
+        Bblue900: '#E5E4FB'
       }
     },
   },

@@ -1,36 +1,44 @@
 import Sideitem from "../Sideitem";
-import { CadIcon, Images, Illustrator, Photoshop, Present, Links, Pdf, Sketchupicon, Other, } from "../../../Icons/Sidebar/Index.ts";
+import { CadIcon, Images, HomeIcon, Illustrator, Photoshop, Present, Links, Pdf, Sketchupicon, Other, } from "../../../Icons/Sidebar/Index.ts";
 
 function Sidebar() {
 
     const sideData = [
         {
-            text: "Cad blocks",
+            text: "Home",
+            icon: <HomeIcon />
+        },
+        {
+            text: "Tweet",
             icon: <CadIcon />
         },
         {
-            text: "Sketchup blocks",
+            text: "instagram",
             icon: <Sketchupicon />
         },
         {
-            text: "Pdf",
+            text: "Youtube",
             icon: <Pdf />
         },
         {
-            text: "Illustrator",
+            text: "websites",
             icon: <Illustrator />
         },
         {
-            text: "Presentation",
+            text: "canva",
             icon: <Present />
         },
         {
-            text: "Other",
+            text: "Drive",
             icon: <Other />
         },
         {
-            text: "Photoshop",
+            text: "any",
             icon: <Photoshop />
+        },
+        {
+            text: "Links",
+            icon: <Links />
         },
         {
             text: "Images",

@@ -21,7 +21,7 @@ html, body {
 }
 
 body {
-  @apply bg-gray-500 text-gray-900 font-sans;
+  @apply bg-gray-200  font-sans;
 }
 
 @media (prefers-color-scheme: light) {

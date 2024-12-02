@@ -2,6 +2,7 @@
 interface buttonProps {
     variant: 'primary' | 'secondary';
     size: 'sm' | 'md' | 'lg';
+    defaultCss?: string,
     text: string;
     startIcon?: any;
     endIcon?: any;
@@ -11,8 +12,8 @@ interface buttonProps {
 
 const constants = {
     variant: {
-        primary: 'bg-Bblue500 rounded-sm font-normal',
-        secondary: 'bg-Bblue500 rounded-md text-blue-800 opacity-65 font-normal'
+        primary: 'bg-Bblue500 rounded-md font-normal text-white',
+        secondary: 'bg-Bblue500 rounded-md text-blue-800 opacity-80 font-normal'
     },
     size: {
         sm: 'px-4 py-2 text-sm ',
@@ -27,7 +28,7 @@ const Button = (props: buttonProps) => {
 
     return (
         <>
-            <button className={`${constants.variant[props.variant]} ${constants.size[props.size]}`}>
+            <button className={`${props.defaultCss} ${constants.variant[props.variant]} ${constants.size[props.size]}`}>
                 <div className="flex justify-center items-center leading-3">
                     {props.startIcon}
                     <span>{props.text}</span>
