@@ -1,9 +1,10 @@
-
+import { useState } from "react"
 
 interface sideProp {
     type: 'selected' | 'normal'
     startIcon?: any,
-    text: string
+    text: string,
+    minimize: boolean
 };
 
 const menuCss = {
@@ -11,15 +12,21 @@ const menuCss = {
     normal: 'py-2 px-4'
 }
 
-const defaultCss = 'flex justify-center items-center text-black text-sm space-x-2'
+const defaultCss = 'flex justify-start w-full items-center text-black text-sm space-x-2'
 
 function Sideitem(props: sideProp) {
+    const [isActive, setIsactive] = useState(false);
+
+    const handleActive = () => {
+        setIsactive(true)
+    }
+
     return (
-        <div className={`${defaultCss} ${menuCss[props.type]} ${defaultCss}`}>
+        <div onClick={handleActive} className={`${isActive ? "bg-Bblue500 text-white" : null} ${defaultCss} ${menuCss[props.type]} ${defaultCss}`}>
             <div>
                 {props.startIcon}
             </div>
-            <span>{props.text}</span>
+            <span>{`${props.minimize ? props.text : ""}`}</span>
         </div>
     )
 }

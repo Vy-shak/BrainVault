@@ -1,4 +1,4 @@
-import CadIcon from "./Cad";
+import Youtube from "./Youtube";
 import Illustrator from "./Illustrator";
 import Links from "./Links";
 import Other from "./Other";
@@ -9,9 +9,10 @@ import Sketchupicon from "./Sketchupicon";
 import Images from "./Images";
 import HomeIcon from "./Homeicon";
 import Delete from "../Delete";
+import Close from "./Close";
 
 
 export {
     Images, Links, Other, Present, Sketchupicon, Pdf, Illustrator,
-    Photoshop, CadIcon, HomeIcon, Delete
+    Photoshop, Youtube, HomeIcon, Delete, Close
 }

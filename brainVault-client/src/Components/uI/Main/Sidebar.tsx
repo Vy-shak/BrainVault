@@ -1,16 +1,23 @@
 import Sideitem from "../Sideitem";
-import { CadIcon, Images, HomeIcon, Illustrator, Photoshop, Present, Links, Pdf, Sketchupicon, Other, } from "../../../Icons/Sidebar/Index.ts";
+import { useState } from "react";
+import { Youtube, Close, Images, HomeIcon, Illustrator, Photoshop, Present, Links, Pdf, Sketchupicon, Other, } from "../../../Icons/Sidebar/Index.ts";
 
 function Sidebar() {
+    const [minimize, setMinimize] = useState(false);
+
+    const handleMinimize = () => {
+        setMinimize((prev) => !prev)
+    }
 
     const sideData = [
         {
             text: "Home",
-            icon: <HomeIcon />
+            icon: <HomeIcon />,
+            id: 0
         },
         {
-            text: "Tweet",
-            icon: <CadIcon />
+            text: "Youtube",
+            icon: <Youtube />
         },
         {
             text: "instagram",
@@ -47,10 +54,15 @@ function Sidebar() {
     ]
 
     return (
-        <section className="bg-white flex-col flex justify-start items-start">
-            {sideData.map((item, index) => (
-                <Sideitem key={index} text={item.text} startIcon={item.icon} type="normal" />
-            ))}
+        <section className="bg-white w-40 flex-col flex justify-start items-start">
+            <div className="flex w-full justify-end items-center pr-3">
+                <Close />
+            </div>
+            <div>
+                {sideData.map((item, index) => (
+                    <Sideitem key={index} minimize={minimize} text={item.text} startIcon={item.icon} type="normal" />
+                ))}
+            </div>
         </section>
     )
 }
