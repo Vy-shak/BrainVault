@@ -26,7 +26,7 @@ function Sideitem(props: sideProp) {
             <div>
                 {props.startIcon}
             </div>
-            <span>{`${props.minimize ? props.text : ""}`}</span>
+            <span>{`${props.minimize ? "" : props.text}`}</span>
         </div>
     )
 }

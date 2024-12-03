@@ -54,8 +54,8 @@ function Sidebar() {
     ]
 
     return (
-        <section className="bg-white w-40 flex-col flex justify-start items-start">
-            <div className="flex w-full justify-end items-center pr-3">
+        <section className={`bg-white ${minimize ? "w-12" : "w-40"} transition-width ease-in-out flex-col flex justify-start items-start`}>
+            <div onClick={handleMinimize} className="flex w-full justify-end items-center h-fit pr-3">
                 <Close />
             </div>
             <div>
