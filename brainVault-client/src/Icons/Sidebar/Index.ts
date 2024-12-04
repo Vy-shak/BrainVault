@@ -10,9 +10,11 @@ import Images from "./Images";
 import HomeIcon from "./Homeicon";
 import Delete from "../Delete";
 import Close from "./Close";
+import ShareModel from "../../Components/uI/Main/ShareModel";
+import Copy from "../../Components/uI/Copy";
 
 
 export {
     Images, Links, Other, Present, Instaicon, Pdf, Illustrator,
-    Photoshop, Youtube, HomeIcon, Delete, Close
+    Photoshop, Youtube, HomeIcon, Delete, Close, ShareModel, Copy
 }

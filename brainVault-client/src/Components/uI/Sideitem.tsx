@@ -12,7 +12,7 @@ const menuCss = {
     normal: 'py-2 px-4'
 }
 
-const defaultCss = 'flex justify-start w-full h-10 items-center text-black text-sm space-x-2'
+const defaultCss = ' justify-start flex w-full h-10 items-center text-black text-sm space-x-2'
 
 function Sideitem(props: sideProp) {
     const [isActive, setIsactive] = useState(false);
@@ -22,10 +22,10 @@ function Sideitem(props: sideProp) {
     }
 
     return (
-        <div onClick={handleActive} className={`${isActive ? "bg-Bblue500 text-white" : null} ${defaultCss} ${menuCss[props.type]} ${defaultCss}`}>
+        <div onClick={handleActive} className={`${isActive ? "bg-Bblue500 text-white" : "hover:bg-gray-300"} ${defaultCss} ${menuCss[props.type]} ${defaultCss}`}>
             <div>
                 {props.startIcon}
-            </div>
+            </ div>
             <span>{`${props.minimize ? "" : props.text}`}</span>
         </div>
     )
