@@ -9,7 +9,9 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/" >
         <Route path="Signup" element={<Signup />} />
         <Route path="Login" element={<Login />} />
-        <Route path='Home' element={<Home />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/youtube' element={<Home />} />
+        <Route path='/instagram' element={<Home />} />
       </Route>
     </Routes>
   </BrowserRouter>
