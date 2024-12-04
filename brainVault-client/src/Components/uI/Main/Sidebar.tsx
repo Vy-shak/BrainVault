@@ -1,6 +1,6 @@
 import Sideitem from "../Sideitem";
 import { useState } from "react";
-import { Youtube, Close, Images, HomeIcon, Illustrator, Photoshop, Present, Links, Pdf, Sketchupicon, Other, } from "../../../Icons/Sidebar/Index.ts";
+import { Youtube, Close, Images, HomeIcon, Illustrator, Photoshop, Present, Links, Pdf, Instaicon, Other, } from "../../../Icons/Sidebar/Index.ts";
 
 function Sidebar() {
     const [minimize, setMinimize] = useState(false);
@@ -21,7 +21,7 @@ function Sidebar() {
         },
         {
             text: "instagram",
-            icon: <Sketchupicon />
+            icon: <Instaicon />
         },
         {
             text: "Youtube",
@@ -54,11 +54,11 @@ function Sidebar() {
     ]
 
     return (
-        <section className={`bg-white ${minimize ? "w-12" : "w-40"} transition-width ease-in-out flex-col flex justify-start items-start`}>
+        <section style={{ transition: "all 200ms ease-out" }} className={`bg-white ${minimize ? "w-12" : "w-40"} transition duration-150 ease-out flex-col flex justify-start items-start`}>
             <div onClick={handleMinimize} className="flex w-full justify-end items-center h-fit pr-3">
                 <Close />
             </div>
-            <div>
+            <div className="m-0 w-full">
                 {sideData.map((item, index) => (
                     <Sideitem key={index} minimize={minimize} text={item.text} startIcon={item.icon} type="normal" />
                 ))}

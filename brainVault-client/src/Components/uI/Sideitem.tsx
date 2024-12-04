@@ -12,7 +12,7 @@ const menuCss = {
     normal: 'py-2 px-4'
 }
 
-const defaultCss = 'flex justify-start w-full items-center text-black text-sm space-x-2'
+const defaultCss = 'flex justify-start w-full h-10 items-center text-black text-sm space-x-2'
 
 function Sideitem(props: sideProp) {
     const [isActive, setIsactive] = useState(false);
