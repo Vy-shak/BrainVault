@@ -4,8 +4,10 @@ import * as dotenv from 'dotenv';
 import { userRouter } from './Routes/userRoute';
 import { contentRouter } from './Routes/content';
 import { shareRouter } from './Routes/Share';
+import cors from "cors"
 
 const app = express();
+app.use(cors())
 
 app.use(express.json())
 

@@ -18,6 +18,8 @@ userRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
     const password: string = req.body.password;
     const fullname: string = req.body.fullname;
 
+    console.log("one", username, 'two', password, 'three', fullname)
+
     if (!password) {
         res.status(401).send({
             err: "password is not correct"
@@ -77,7 +79,7 @@ userRouter.post('/signin', async (req: any, res: any) => { //fix any
     }
 
     const { username, password }: bodyT = req.body;
-    console.log(username)
+    console.log(username, password)
 
     let secret: string = process.env.JWT_SECRET!;
 
@@ -86,10 +88,23 @@ userRouter.post('/signin', async (req: any, res: any) => { //fix any
             username: username,
         });
 
+        if (!check) {
+            res.status(411).send({
+                err: "bad credential"
+            });
+            return
+        }
+
+        console.log(check)
+
         console.log(check)
         if (check) {
             const passCheck = await bcrypt.compare(password, check.password);
-            console.log(passCheck, 'hello')
+            if (!passCheck) {
+                res.send({
+                    err: "wrong password"
+                })
+            }
         }
 
         if (check && secret) {

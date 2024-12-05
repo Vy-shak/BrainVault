@@ -22,6 +22,35 @@ declare module 'express-serve-static-core' {
 contentRouter.use(authMiddleware)
 
 
+contentRouter.get("/show", async (req: Request, res: Response) => {
+    const userId = req.id;
+
+    try {
+        const data = await contentmodel.find({
+            userId: userId
+        });
+
+        if (data) {
+            res.send({
+                msg: "got data successfully",
+                details: data
+            })
+        }
+        else {
+            res.status(411).send({
+                msg: "no data present"
+            });
+            return
+        }
+    } catch (error) {
+        res.status(411).send({
+            err: "can not fetch data",
+            details: error
+        })
+    }
+})
+
+
 contentRouter.post("/add", async (req: Request, res: Response) => {
     const cType: string = req.body.cType;
     const title: string = req.body.title;
