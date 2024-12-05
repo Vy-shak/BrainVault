@@ -1,10 +1,9 @@
-import React from 'react'
-
+import FormLogin from "../Components/uI/Main/LoginForm"
 function Login() {
     return (
-        <div>
-            Welcome login
-        </div>
+        <section>
+            <FormLogin />
+        </section>
     )
 }
 

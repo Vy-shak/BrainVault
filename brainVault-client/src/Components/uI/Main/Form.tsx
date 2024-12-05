@@ -1,13 +1,14 @@
 
 import axios from 'axios';
 import InputAuth from '../InputAuth.js';
-import { useRef } from 'react';
+import { HtmlHTMLAttributes, useRef } from 'react';
 
 //@ts-ignore
 function AuthForm() {
-    const usernameRef: any = useRef('');
-    const passwordRef: any = useRef('');
-    const fullnameRef: any = useRef('');
+    const fullnameRef: any = useRef('')
+    const usernameRef: any = useRef('')
+    const passwordRef: any = useRef('')
+
 
     const sendInfo = async () => {
         try {
@@ -37,8 +38,8 @@ function AuthForm() {
                 <form onClick={handleForm} autoComplete='on'>
                     <div className='w-full bg-white  flex flex-col justify-start items-start'>
                         <InputAuth reference={fullnameRef} errMsg={"error"} placeholder={"fullname"} />
-                        <InputAuth reference={usernameRef} errMsg={"error"} placeholder={"fullname"} />
-                        <InputAuth reference={passwordRef} errMsg={"error"} placeholder={"fullname"} />
+                        <InputAuth reference={usernameRef} errMsg={"error"} placeholder={"username"} />
+                        <InputAuth reference={passwordRef} errMsg={"error"} placeholder={"password"} />
                     </div>
                     <button onClick={sendInfo} className='bg-blue-900 mt-4 px-24 rounded-md py-2 text-sm'>Join</button>
                     <p className='text-Agrey300 text-[16px] mt-2'>Already has an account?<span className='text-[18px] text-Ablue600 font-semibold'>Login</span></p>
