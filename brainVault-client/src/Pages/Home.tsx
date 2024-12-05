@@ -15,18 +15,18 @@ function Home() {
     const [open, setOpen] = useState(false);
     const [share, setShare] = useState(false);
 
-    useEffect(() => (
-        function async() {
-            const token = localStorage.getItem("token");
-            const allData = axios.get("http://localhost:3000/api/v1/content/show", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authtoken': token
-                }
-            });
-            console.log(allData)
-        }
-    ), []);
+    // useEffect(() => (
+    //     function s Callme() {
+    //         const token = localStorage.getItem("token");
+    //         const allData = axios.get("http://localhost:3000/api/v1/content/show", {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'authtoken': token
+    //             }
+    //         });
+    //         console.log(allData)
+    //     }
+    // ), []);
 
 
 
@@ -49,7 +49,7 @@ function Home() {
         <section className="w-screen h-screen flex">
             <ShareModel share={share} setShare={handleShare} />
             <Modal open={open} setOpen={openOrclose} />
-            <span className="absolute left-52 top-10 font-semibold text-2xl">Hello Yshak, Welcome!</span>
+            {/* <span className="absolute left-52 top-10 font-semibold text-2xl">Hello Yshak, Welcome!</span> */}
             <div className="w-fit  h-full flex justify-start items-center bg-white">
                 <Sidebar />
             </div>

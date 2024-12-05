@@ -1,6 +1,7 @@
 import Sideitem from "../Sideitem";
 import { useState } from "react";
 import { Youtube, Close, Images, HomeIcon, Illustrator, Photoshop, Present, Links, Pdf, Instaicon, Other, } from "../../../Icons/Sidebar/Index.ts";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
     const [minimize, setMinimize] = useState(false);
@@ -58,11 +59,11 @@ function Sidebar() {
             <div onClick={handleMinimize} className="flex w-full justify-end items-center h-fit pr-3">
                 <Close />
             </div>
-            <div className="m-0 w-full">
+            <NavLink className="m-0 w-full">
                 {sideData.map((item, index) => (
                     <Sideitem key={index} minimize={minimize} text={item.text} startIcon={item.icon} type="normal" />
                 ))}
-            </div>
+            </NavLink>
         </section>
     )
 }

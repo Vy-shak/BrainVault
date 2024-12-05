@@ -2,6 +2,7 @@ import Delete from "../../../Icons/Delete";
 import Input from "../Input";
 import Button from "../Button";
 import { motion, AnimatePresence, color } from "motion/react";
+import { sideData } from "../Constant";
 import Type from "../Type";
 
 
@@ -23,13 +24,16 @@ const Modal = (props: modelType) => {
                             <div onClick={props.setOpen} className="flex justify-end ">
                                 <Delete />
                             </div>
-                            <div>
-                                <Type text='hello' varient='selected' size="sm" />
+                            <span className="text-sm font-normal text-gray-700">Type of the Link</span>
+                            <div className="w-auto p-0 flex justify-start items-center mt-2 flex-shrink-0 h-auto gap-x-2 gap-y-3 flex-wrap">
+                                {sideData.map((item) => (
+                                    <Type text={item.text} varient='normal' size="sm" />
+                                ))}
                             </div>
                             <div className="flex space-y-4 flex-col">
-                                <Input title="title" />
-                                <Input title="about" />
-                                <Input title="Link" />
+                                <Input Size="normal" title="Name" />
+                                <Input Size="medium" title="about" />
+                                <Input Size="normal" title="Link" />
                             </div>
                             <div onClick={props.setOpen} className="mt-6 w-full h-fit flex justify-center items-center">
                                 <Button variant="primary" text="Add link to brainValut" size="md" />
