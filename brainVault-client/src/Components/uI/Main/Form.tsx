@@ -1,10 +1,12 @@
 
 import axios from 'axios';
 import InputAuth from '../InputAuth.js';
-import { HtmlHTMLAttributes, useRef } from 'react';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //@ts-ignore
 function AuthForm() {
+    const navigate = useNavigate();
     const fullnameRef: any = useRef('')
     const usernameRef: any = useRef('')
     const passwordRef: any = useRef('')
@@ -21,6 +23,9 @@ function AuthForm() {
                     'Content-Type': 'application/json'
                 }
             });
+            if (upload.status === 200) {
+                navigate("/Login")
+            }
         } catch (error) {
             console.log(error)
             console.log("unable to upload")

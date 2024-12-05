@@ -1,5 +1,5 @@
 import { Sidebar } from "../Components/uI/Main/Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Components/uI/Button";
 import IconShare from "../Icons/Share";
 import Card from "../Components/uI/Main/Card";
@@ -7,12 +7,28 @@ import Modal from "../Components/uI/Main/Modal";
 import Addfile from "../Components/uI/addfile";
 import CardAll from "../Components/uI/Main/CardAll";
 import { ShareModel } from "../Icons/Sidebar/Index";
+import axios, { all } from "axios";
 
 
 
 function Home() {
     const [open, setOpen] = useState(false);
     const [share, setShare] = useState(false);
+
+    useEffect(() => (
+        function async() {
+            const token = localStorage.getItem("token");
+            const allData = axios.get("http://localhost:3000/api/v1/content/show", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authtoken': token
+                }
+            });
+            console.log(allData)
+        }
+    ), []);
+
+
 
     function openOrclose() {
         setOpen((prev) => !prev);
@@ -26,6 +42,7 @@ function Home() {
 
     function handleShare() {
         setShare((prev) => !prev)
+        setOpen(false)
     }
 
     return (

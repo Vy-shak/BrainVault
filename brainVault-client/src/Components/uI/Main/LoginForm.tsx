@@ -1,8 +1,10 @@
 import InputAuth from '../InputAuth.tsx';
 import axios from 'axios';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function FormLogin() {
+    const navigate = useNavigate()
     const usernameRef: any = useRef('');
     const passwordRef: any = useRef('');
 
@@ -17,7 +19,12 @@ function FormLogin() {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(Login)
+
+            if (Login.status === 200) {
+                const token = Login.data.token
+                localStorage.setItem("token", token);
+                navigate('/')
+            }
         } catch (error) {
             console.log("some error in login");
             console.log(error)

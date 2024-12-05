@@ -2,6 +2,7 @@ import Delete from "../../../Icons/Delete";
 import Input from "../Input";
 import Button from "../Button";
 import { motion, AnimatePresence, color } from "motion/react";
+import Type from "../Type";
 
 
 
@@ -21,6 +22,9 @@ const Modal = (props: modelType) => {
                         <div className="w-full px-6 py-4  h-fit  rounded-md  opacity-100   bg-white">
                             <div onClick={props.setOpen} className="flex justify-end ">
                                 <Delete />
+                            </div>
+                            <div>
+                                <Type text='hello' varient='selected' size="sm" />
                             </div>
                             <div className="flex space-y-4 flex-col">
                                 <Input title="title" />

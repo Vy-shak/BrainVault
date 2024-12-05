@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Copy, Links, Delete } from "../../../Icons/Sidebar/Index.ts";
 import Button from '../Button.tsx';
 
-
 interface Sharet {
     share: boolean,
     setShare: () => void
