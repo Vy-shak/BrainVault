@@ -1,10 +1,11 @@
 import Delete from "../../../Icons/Delete";
+import axios from "axios";
 import Input from "../Input";
 import Button from "../Button";
 import { motion, AnimatePresence, color } from "motion/react";
 import { sideData } from "../Constant";
 import Type from "../Type";
-
+import { useRef } from "react";
 
 
 interface modelType {
@@ -13,6 +14,31 @@ interface modelType {
 }
 
 const Modal = (props: modelType) => {
+    const nameRef: any = useRef('');
+    const aboutRef: any = useRef('');
+    const linkRef: any = useRef('');
+
+    console.log(nameRef)
+
+    const uploadContent = async () => {
+        try {
+            const token = await localStorage.getItem('token');
+            console.log(token)
+            const upload = await axios.post('http://localhost:3000/api/v1/content/add', {
+                linkname: nameRef.current.value,
+                about: aboutRef.current.value,
+                link: linkRef.current.value
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': token
+                }
+            })
+        } catch (error) {
+            console.log('content upload error')
+        }
+    }
+
     return (
         <>
             <AnimatePresence>
@@ -31,12 +57,12 @@ const Modal = (props: modelType) => {
                                 ))}
                             </div>
                             <div className="flex space-y-4 flex-col">
-                                <Input Size="normal" title="Name" />
-                                <Input Size="medium" title="about" />
-                                <Input Size="normal" title="Link" />
+                                <Input reference={nameRef} Size="normal" title="Name" />
+                                <Input reference={aboutRef} Size="medium" title="about" />
+                                <Input reference={linkRef} Size="normal" title="Link" />
                             </div>
                             <div onClick={props.setOpen} className="mt-6 w-full h-fit flex justify-center items-center">
-                                <Button variant="primary" text="Add link to brainValut" size="md" />
+                                <Button handleClick={uploadContent} variant="primary" text="Add link to brainValut" size="md" />
                             </div>
                         </div>
                     </motion.div>}
