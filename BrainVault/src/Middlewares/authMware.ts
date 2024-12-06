@@ -6,7 +6,8 @@ dotenv.config();
 
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const header = req.headers['authtoken'];
+    const header = req.headers['token'];
+    console.log(header)
 
     try {
         if (!header) {
@@ -31,7 +32,6 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
             err: "Authentication failed",
             details: error
         });
-
         return
     }
 };

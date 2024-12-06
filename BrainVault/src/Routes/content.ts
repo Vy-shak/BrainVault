@@ -52,16 +52,16 @@ contentRouter.get("/show", async (req: Request, res: Response) => {
 
 
 contentRouter.post("/add", async (req: Request, res: Response) => {
-    const cType: string = req.body.cType;
-    const title: string = req.body.title;
+    const linktype: string = req.body.linktype;
+    const linkname: string = req.body.linkname;
     const about: string = req.body.about;
     const link: string = req.body.link;
     const id: string = req.id!;
 
     try {
         const upload = await contentmodel.create({
-            cType: cType,
-            title: title,
+            linktype: linktype,
+            linkname: linkname,
             about: about,
             link: link,
             userId: id
