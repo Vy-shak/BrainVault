@@ -6,6 +6,7 @@ import { motion, AnimatePresence, color } from "motion/react";
 import { sideData } from "../Constant";
 import Type from "../Type";
 import { useRef } from "react";
+import { useState } from "react";
 
 
 interface modelType {
@@ -14,6 +15,8 @@ interface modelType {
 }
 
 const Modal = (props: modelType) => {
+    const [typeId, setTypeid] = useState();
+    console.log(typeId)
     const nameRef: any = useRef('');
     const aboutRef: any = useRef('');
     const linkRef: any = useRef('');
@@ -23,7 +26,6 @@ const Modal = (props: modelType) => {
     const uploadContent = async () => {
         try {
             const token = await localStorage.getItem('token');
-            console.log(token)
             const upload = await axios.post('http://localhost:3000/api/v1/content/add', {
                 linkname: nameRef.current.value,
                 about: aboutRef.current.value,
@@ -52,8 +54,8 @@ const Modal = (props: modelType) => {
                             </div>
                             <span className="text-sm font-normal text-gray-700">Type of the Link</span>
                             <div className="w-auto p-0 flex justify-start items-center mt-2 flex-shrink-0 h-auto gap-x-2 gap-y-3 flex-wrap">
-                                {sideData.map((item) => (
-                                    <Type text={item.text} varient='normal' size="sm" />
+                                {sideData.map((item, index) => (
+                                    <Type text={item.text} varient={`${typeId === index ? 'selected' : 'normal'}`} id={index} setid={setTypeid} size="sm" />
                                 ))}
                             </div>
                             <div className="flex space-y-4 flex-col">
