@@ -22,7 +22,7 @@ const constant = {
 function Type({ text, logo, varient, size, id, setid }: Typet) {
     console.log(id);
     const handleClick = () => (
-        setid(id)
+        setid({ id: id, text: text })
     )
     return (
         <button onClick={handleClick} className={`${constant.Size[size]} ${constant.varients[varient]}flex justify-center w-fit h-fit m-0 items-center rounded-full shadow-lg`}>

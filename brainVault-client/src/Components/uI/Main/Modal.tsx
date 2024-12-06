@@ -16,17 +16,16 @@ interface modelType {
 
 const Modal = (props: modelType) => {
     const [typeId, setTypeid] = useState();
-    console.log(typeId)
+    console.log(typeId?.text);
     const nameRef: any = useRef('');
     const aboutRef: any = useRef('');
     const linkRef: any = useRef('');
-
-    console.log(nameRef)
 
     const uploadContent = async () => {
         try {
             const token = await localStorage.getItem('token');
             const upload = await axios.post('http://localhost:3000/api/v1/content/add', {
+                linktype: typeId.text,
                 linkname: nameRef.current.value,
                 about: aboutRef.current.value,
                 link: linkRef.current.value
@@ -55,7 +54,7 @@ const Modal = (props: modelType) => {
                             <span className="text-sm font-normal text-gray-700">Type of the Link</span>
                             <div className="w-auto p-0 flex justify-start items-center mt-2 flex-shrink-0 h-auto gap-x-2 gap-y-3 flex-wrap">
                                 {sideData.map((item, index) => (
-                                    <Type text={item.text} varient={`${typeId === index ? 'selected' : 'normal'}`} id={index} setid={setTypeid} size="sm" />
+                                    <Type text={item.text} varient={`${typeId?.id === index ? 'selected' : 'normal'}`} id={index} setid={setTypeid} size="sm" />
                                 ))}
                             </div>
                             <div className="flex space-y-4 flex-col">
