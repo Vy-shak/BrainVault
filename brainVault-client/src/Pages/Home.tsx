@@ -13,21 +13,29 @@ import { Outlet } from "react-router-dom";
 
 
 function Home() {
+    const [linkData, setLinkdata] = useState();
     const [open, setOpen] = useState(false);
     const [share, setShare] = useState(false);
 
-    // useEffect(() => (
-    //     function s Callme() {
-    //         const token = localStorage.getItem("token");
-    //         const allData = axios.get("http://localhost:3000/api/v1/content/show", {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'authtoken': token
-    //             }
-    //         });
-    //         console.log(allData)
-    //     }
-    // ), []);
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = localStorage.getItem('token')
+            try {
+                const response = await axios.get('http://localhost:3000/api/v1/content/show', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': token
+                    }
+                });
+                setLinkdata(response.data.details)
+            } catch (error) {
+                console.log("fetching error", error)
+            }
+        }
+        fetchData()
+    }, []);
+
+    console.log(linkData)
 
 
 
@@ -54,7 +62,11 @@ function Home() {
             <div className="w-fit  h-full flex justify-start items-center bg-white">
                 <Sidebar />
             </div>
-            <Outlet />
+            <div>
+                {linkData && linkData.map((item: any) => (
+                    <Card title={item.linkname} about={item.about} link={item.link} />
+                ))}
+            </div>
             <Button handleClick={handleShare} variant="primary" size="sm" text="Share brain" defaultCss="absolute top-4 right-6 " startIcon={<IconShare />} />
             <Addfile setOpen={openOnly} />
 
