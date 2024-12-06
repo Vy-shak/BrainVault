@@ -25,10 +25,6 @@ function Sidebar() {
             icon: <Instaicon />
         },
         {
-            text: "Youtube",
-            icon: <Pdf />
-        },
-        {
             text: "websites",
             icon: <Illustrator />
         },
@@ -59,11 +55,11 @@ function Sidebar() {
             <div onClick={handleMinimize} className="flex w-full justify-end items-center h-fit pr-3">
                 <Close />
             </div>
-            <NavLink className="m-0 w-full">
+            <div className="m-0 w-full">
                 {sideData.map((item, index) => (
                     <Sideitem key={index} minimize={minimize} text={item.text} startIcon={item.icon} type="normal" />
                 ))}
-            </NavLink>
+            </div>
         </section>
     )
 }

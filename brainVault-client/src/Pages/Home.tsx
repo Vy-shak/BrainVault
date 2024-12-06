@@ -8,6 +8,7 @@ import Addfile from "../Components/uI/addfile";
 import CardAll from "../Components/uI/Main/CardAll";
 import { ShareModel } from "../Icons/Sidebar/Index";
 import axios, { all } from "axios";
+import { Outlet } from "react-router-dom";
 
 
 
@@ -53,7 +54,7 @@ function Home() {
             <div className="w-fit  h-full flex justify-start items-center bg-white">
                 <Sidebar />
             </div>
-            <CardAll />
+            <Outlet />
             <Button handleClick={handleShare} variant="primary" size="sm" text="Share brain" defaultCss="absolute top-4 right-6 " startIcon={<IconShare />} />
             <Addfile setOpen={openOnly} />
 

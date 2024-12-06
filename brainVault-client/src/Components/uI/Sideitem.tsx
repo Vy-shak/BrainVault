@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { NavLink } from "react-router-dom"
 
 interface sideProp {
     type: 'selected' | 'normal'
@@ -12,22 +13,19 @@ const menuCss = {
     normal: 'py-2 px-4'
 }
 
-const defaultCss = ' justify-start flex w-full h-10 items-center text-black text-sm space-x-2'
+const defaultCss = ' justify-start flex w-full h-10 items-center text-sm space-x-2'
 
 function Sideitem(props: sideProp) {
-    const [isActive, setIsactive] = useState(false);
-
-    const handleActive = () => {
-        setIsactive(true)
-    }
 
     return (
-        <div onClick={handleActive} className={`${isActive ? "bg-Bblue500 text-white" : "hover:bg-gray-300"} ${defaultCss} ${menuCss[props.type]} ${defaultCss}`}>
-            <div>
-                {props.startIcon}
-            </ div>
-            <span>{`${props.minimize ? "" : props.text}`}</span>
-        </div>
+        <NavLink to={`/${props.text}`} className={({ isActive }) => isActive ? `${defaultCss} ${menuCss[props.type]} bg-Bblue500 text-white` : `${defaultCss} ${menuCss[props.type]} hover:bg-gray-300`}>
+            <div className={`${defaultCss}`}>
+                <div>
+                    {props.startIcon}
+                </div>
+                <span>{`${props.minimize ? "" : props.text}`}</span>
+            </div>
+        </NavLink>
     )
 }
 
