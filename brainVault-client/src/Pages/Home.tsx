@@ -33,7 +33,7 @@ function Home() {
             }
         }
         fetchData()
-    }, []);
+    }, [open]);
 
     console.log(linkData)
 
@@ -61,7 +61,7 @@ function Home() {
             {/* <span className="absolute left-52 top-10 font-semibold text-2xl">Hello Yshak, Welcome!</span> */}
             <div className="flex-col">
                 <Sidebar />
-                <div className="h-screen -mt-2 w-full bg-white">
+                <div className="h-screen rounded-md -mt-2 w-full bg-white">
                 </div>
             </div>
             <section className="grid grid-cols-4 w-full h-fit bg-gray-200 pt-24 px-3 grid-rows-3 gap-x-2 gap-y-2">

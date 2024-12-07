@@ -15,28 +15,33 @@ interface modelType {
 }
 
 const Modal = (props: modelType) => {
-    const [typeId, setTypeid] = useState();
+    const [typeId, setTypeid] = useState('');
     console.log(typeId?.text);
     const nameRef: any = useRef('');
     const aboutRef: any = useRef('');
     const linkRef: any = useRef('');
 
     const uploadContent = async () => {
-        try {
-            const token = await localStorage.getItem('token');
-            const upload = await axios.post('http://localhost:3000/api/v1/content/add', {
-                linktype: typeId.text,
-                linkname: nameRef.current.value,
-                about: aboutRef.current.value,
-                link: linkRef.current.value
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'token': token
-                }
-            })
-        } catch (error) {
-            console.log('content upload error')
+        if (typeId) {
+            try {
+                const token = await localStorage.getItem('token');
+                const upload = await axios.post('http://localhost:3000/api/v1/content/add', {
+                    linktype: typeId.text,
+                    linkname: nameRef.current.value,
+                    about: aboutRef.current.value,
+                    link: linkRef.current.value
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': token
+                    }
+                })
+            } catch (error) {
+                console.log('content upload error')
+            }
+        }
+        else {
+            alert("Please select any contents");
         }
     }
 

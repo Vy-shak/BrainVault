@@ -14,8 +14,9 @@ function Card({ Ctype, about, title, link,
 }: Cardprops) {
     return (
         <div className='w-fit flex flex-col justify-start items-start h-fit px-2 py-4 bg-white rounded-md shadow-md outline-stone-200'>
-            <div className="flex justify-center items-center space-x-3">
+            <div className="flex justify-between w-full items-center space-x-3">
                 <span className=" font-semibold">{title}</span>
+                <Delete />
             </div>
             <div className="text-sm text-left w-full h-9 text-slate-700 overflow-hidden">
                 <p className="text-[14px]">{`${about}`}</p>
@@ -26,7 +27,6 @@ function Card({ Ctype, about, title, link,
                     src={`${link}`}
                     title="YouTube video player"
                     style={{ width: "100%", height: "100%", minHeight: "0px", minBlockSize: "0px" }}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy=""
                     allowfullscreen>
                 </iframe>
