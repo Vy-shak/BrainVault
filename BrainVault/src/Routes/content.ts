@@ -55,8 +55,23 @@ contentRouter.post("/add", async (req: Request, res: Response) => {
     const linktype: string = req.body.linktype;
     const linkname: string = req.body.linkname;
     const about: string = req.body.about;
-    const link: string = req.body.link;
+    let link: string = req.body.link;
     const id: string = req.id!;
+
+    function Urltoembed(url: string) {
+        const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|v\/|embed\/|.+&v=))([^&\s?]+)/);
+
+        if (match && match[1]) {
+            const videoId = match[1];
+            return `https://www.youtube.com/embed/${videoId}`;
+        } else {
+            throw new Error("Invalid YouTube link");
+        }
+    };
+
+    if (linktype === 'Youtube') {
+        link = Urltoembed(link);
+    }
 
     try {
         const upload = await contentmodel.create({
