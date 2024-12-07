@@ -55,22 +55,26 @@ function Home() {
     }
 
     return (
-        <section className="w-screen h-screen flex">
+        <section className="w-screen  pl-2 pt-2 items-start h-full overflow-x-hidden flex">
             <ShareModel share={share} setShare={handleShare} />
             <Modal open={open} setOpen={openOrclose} />
             {/* <span className="absolute left-52 top-10 font-semibold text-2xl">Hello Yshak, Welcome!</span> */}
-            <div className="w-fit  h-full flex justify-start items-center bg-white">
+            <div className="flex-col">
                 <Sidebar />
+                <div className="h-screen -mt-2 w-full bg-white">
+                </div>
             </div>
-            <div>
+            <section className="grid grid-cols-4 w-full h-fit bg-gray-200 pt-24 px-3 grid-rows-3 gap-x-2 gap-y-2">
                 {linkData && linkData.map((item: any) => (
                     <Card title={item.linkname} about={item.about} link={item.link} />
                 ))}
-            </div>
-            <Button handleClick={handleShare} variant="primary" size="sm" text="Share brain" defaultCss="absolute top-4 right-6 " startIcon={<IconShare />} />
+            </section>
+            <Button handleClick={handleShare} variant="primary" size="sm" text="Share brain" defaultCss="fixed top-4 right-6 " startIcon={<IconShare />} />
             <Addfile setOpen={openOnly} />
 
-        </section>
+        </section >
+
+
     )
 }
 

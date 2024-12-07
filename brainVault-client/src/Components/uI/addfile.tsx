@@ -6,7 +6,7 @@ interface setOpent {
 
 function Addfile({ setOpen }: setOpent) {
     return (
-        <div className="w-fit h-fit absolute right-10 bottom-16" onClick={setOpen}>
+        <div className="w-fit h-fit fixed right-10 bottom-16" onClick={setOpen}>
             <Plus />
         </div>
     )

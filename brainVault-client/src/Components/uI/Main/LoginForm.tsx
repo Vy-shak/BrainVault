@@ -23,7 +23,7 @@ function FormLogin() {
             if (Login.status === 200) {
                 const token = Login.data.token
                 localStorage.setItem("token", token);
-                navigate('/')
+                navigate('/home')
             }
         } catch (error) {
             console.log("some error in login");
