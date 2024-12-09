@@ -8,15 +8,23 @@ interface Cardprops {
     about: string
     title: string,
     link: string,
+    id: number | undefined,
+    setId: (val: number) => any
 }
 
-function Card({ Ctype, about, title, link,
+function Card({ Ctype, id, setId, about, title, link,
 }: Cardprops) {
+
+    const Handledelete = () => (
+        setId(id)
+    )
     return (
         <div className='w-fit flex flex-col justify-start items-start h-fit px-2 py-4 bg-white rounded-md shadow-md outline-stone-200'>
             <div className="flex justify-between w-full items-center space-x-3">
                 <span className=" font-semibold">{title}</span>
-                <Delete />
+                <div onClick={Handledelete} className="w-fit h-fit">
+                    <Delete />
+                </div>
             </div>
             <div className="text-sm text-left w-full h-9 text-slate-700 overflow-hidden">
                 <p className="text-[14px]">{`${about}`}</p>

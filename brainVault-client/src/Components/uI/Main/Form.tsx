@@ -37,7 +37,7 @@ function AuthForm() {
     }
 
     return (
-        <div className='w-1/2 h-full centerDiv bg-Agrey1200 px-16'>
+        <div className='w-1/2 h-full flex justify-center items-center bg-Agrey1200 px-16'>
             <div className='centerDiv flex-col bg-white rounded-md px-6 py-6 w-full '>
                 <label className='text-Agrey500 font-Aroboto text-lg font-semibold' >Become a member</label>
                 <form onClick={handleForm} autoComplete='on'>

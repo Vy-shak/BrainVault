@@ -16,26 +16,53 @@ function Home() {
     const [linkData, setLinkdata] = useState();
     const [open, setOpen] = useState(false);
     const [share, setShare] = useState(false);
+    const [id, setid] = useState(false);
+    console.log(linkData)
+    console.log(id)
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem('token')
             try {
+                const token = await localStorage.getItem('token');
                 const response = await axios.get('http://localhost:3000/api/v1/content/show', {
                     headers: {
                         'Content-Type': 'application/json',
                         'token': token
                     }
                 });
-                setLinkdata(response.data.details)
+                const data = await response.data.details;
+                if (data) {
+                    setLinkdata(data)
+                }
             } catch (error) {
                 console.log("fetching error", error)
             }
         }
         fetchData()
-    }, [open]);
+    }, [open, id]);
 
-    console.log(linkData)
+    useEffect(() => {
+        const deleteCard = async () => {
+            if (id) {
+                try {
+                    const token = await localStorage.getItem('token');
+                    const response = await axios.post('http://localhost:3000/api/v1/content/delete', {
+                        contentId: id
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': token
+                        }
+                    });
+                } catch (error) {
+                    console.log("fetching error", error)
+                }
+            }
+        }
+        deleteCard()
+    }, [id]);
+
+
 
 
 
@@ -65,8 +92,8 @@ function Home() {
                 </div>
             </div>
             <section className="grid grid-cols-4 w-full h-fit bg-gray-200 pt-24 px-3 grid-rows-3 gap-x-2 gap-y-2">
-                {linkData && linkData.map((item: any) => (
-                    <Card title={item.linkname} about={item.about} link={item.link} />
+                {linkData && linkData.map((item: any, Index: number) => (
+                    <Card id={item._id} setId={setid} title={item.linkname} about={item.about} link={item.link} />
                 ))}
             </section>
             <Button handleClick={handleShare} variant="primary" size="sm" text="Share brain" defaultCss="fixed top-4 right-6 " startIcon={<IconShare />} />
