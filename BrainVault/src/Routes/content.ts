@@ -24,6 +24,9 @@ contentRouter.use(authMiddleware)
 
 contentRouter.get("/show", async (req: Request, res: Response) => {
     const userId = req.id;
+    const linktype: string = req.body.linktype;
+
+    console.log(linktype)
 
     try {
         const data = await contentmodel.find({
@@ -72,6 +75,7 @@ contentRouter.post("/add", async (req: Request, res: Response) => {
     if (linktype === 'Youtube') {
         link = Urltoembed(link);
     }
+    else { link = Urltoembed(link) }
 
     try {
         const upload = await contentmodel.create({
