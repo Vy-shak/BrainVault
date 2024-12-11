@@ -9,7 +9,7 @@ interface Cardprops {
     title: string,
     link: string,
     id: number | undefined,
-    setId: (val: number) => any
+    setId: (val: any) => any
 }
 
 function Card({ Ctype, id, setId, about, title, link,

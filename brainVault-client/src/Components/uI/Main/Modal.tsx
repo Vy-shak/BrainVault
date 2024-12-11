@@ -7,15 +7,15 @@ import { sideData } from "../Constant";
 import Type from "../Type";
 import { useRef } from "react";
 import { useState } from "react";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { modalOpenatom } from "../../../Atom";
 
 
-interface modelType {
-    open: boolean,
-    setOpen: () => void
-}
 
-const Modal = (props: modelType) => {
+const Modal = () => {
     const [typeId, setTypeid] = useState('');
+    const setOpen = useSetRecoilState(modalOpenatom);
+    const open = useRecoilValue(modalOpenatom)
     console.log(typeId?.text);
     const nameRef: any = useRef('');
     const aboutRef: any = useRef('');
@@ -35,7 +35,9 @@ const Modal = (props: modelType) => {
                         'Content-Type': 'application/json',
                         'token': token
                     }
-                })
+                });
+                setOpen((prev) => !prev)
+
             } catch (error) {
                 console.log('content upload error')
             }
@@ -48,12 +50,12 @@ const Modal = (props: modelType) => {
     return (
         <>
             <AnimatePresence>
-                {props.open &&
+                {open &&
                     <motion.div initial={{ opacity: 0, scale: 0.1 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.9 }} style={{ backgroundColor: "rgba(0, 0, 0,0.5)" }} className='w-screen backdrop-blur-sm p-48 flex justify-center items-center h-screen fixed top-0 right-0'>
                         <div className="w-full px-6 py-4  h-fit  rounded-md  opacity-100   bg-white">
-                            <div onClick={props.setOpen} className="flex justify-end ">
+                            <div onClick={() => setOpen(false)} className="flex justify-end ">
                                 <Delete />
                             </div>
                             <span className="text-sm font-normal text-gray-700">Type of the Link</span>
@@ -67,7 +69,7 @@ const Modal = (props: modelType) => {
                                 <Input reference={aboutRef} Size="medium" title="about" />
                                 <Input reference={linkRef} Size="normal" title="Link" />
                             </div>
-                            <div onClick={props.setOpen} className="mt-6 w-full h-fit flex justify-center items-center">
+                            <div className="mt-6 w-full h-fit flex justify-center items-center">
                                 <Button handleClick={uploadContent} variant="primary" text="Add link to brainValut" size="md" />
                             </div>
                         </div>

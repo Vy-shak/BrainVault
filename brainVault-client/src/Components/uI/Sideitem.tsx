@@ -18,7 +18,7 @@ const defaultCss = ' justify-start flex w-full h-10 items-center text-sm space-x
 function Sideitem(props: sideProp) {
 
     return (
-        <NavLink to={`/${props.text}`} className={({ isActive }) => isActive ? `${defaultCss} ${menuCss[props.type]} bg-Bblue500 text-white` : `${defaultCss} ${menuCss[props.type]} hover:bg-gray-300`}>
+        <NavLink to={`/home/${props.text}`} className={({ isActive }) => isActive ? `${defaultCss} ${menuCss[props.type]} bg-Bblue500 text-white` : `${defaultCss} ${menuCss[props.type]} hover:bg-gray-300`}>
             <div className={`${defaultCss}`}>
                 <div>
                     {props.startIcon}
