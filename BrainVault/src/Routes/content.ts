@@ -23,15 +23,26 @@ contentRouter.use(authMiddleware)
 
 
 contentRouter.get("/show", async (req: Request, res: Response) => {
-    const userId = req.id;
-    const linktype: string = req.body.linktype;
+    let type = null
+    if (req.headers['linktype']) {
+        type = req.headers['linktype']
+    }
 
-    console.log(linktype)
+    console.log(type);
+
+    interface check {
+        userId: string,
+        linktype?: string
+    }
+
+    let check: check = { userId: req.id! };
+    if (type !== "Home") {
+        //@ts-ignore
+        check.linktype = type;
+    }
 
     try {
-        const data = await contentmodel.find({
-            userId: userId
-        });
+        const data = await contentmodel.find(check);
 
         if (data) {
             res.send({
