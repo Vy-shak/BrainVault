@@ -44,7 +44,7 @@ function CardAll() {
     }, [isDelete]);
 
     const linktype = params.linktype!;
-    
+
     useEffect(() => {
         fetchData(setLinkdata, linktype)
     }, [open, isDelete]);
@@ -52,7 +52,7 @@ function CardAll() {
     return (
         <section className="grid grid-cols-4 w-full h-fit bg-gray-200 pt-24 px-3 grid-rows-3 gap-x-2 gap-y-2">
             {id && <DeleteModal />}
-            {linkData && linkData.map((item: any,) => (
+            {linkData && linkData.map((item: any) => (
                 <Card id={item._id} setId={setId} title={item.linkname} about={item.about} link={item.link} />
             ))}
         </section>

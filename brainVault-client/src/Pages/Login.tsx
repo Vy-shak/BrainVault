@@ -1,4 +1,4 @@
-import FormLogin from "../Components/uI/Main/LoginForm"
+import FormLogin from "../Components/uI/Main/LoginForm";
 function Login() {
     return (
         <section>

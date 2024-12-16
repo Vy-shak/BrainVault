@@ -1,14 +1,18 @@
-import SignnupCover from "../assets/SignupCover.jpg"
-import AuthForm from '../Components/uI/Main/Form';
-import AlertCard from "../Components/uI/Main/AlertCard";
+import Margin from "../Components/uI/Margin";
+import Navbar from "../Components/uI/Main/Navbar";
+import { edge } from "../Components/uI/Constant";
+import { span } from "motion/react-client";
 function Signup() {
     return (
-        <section className='w-screen h-screen bg-Agrey1200  justify-between flex items-center'>
-            <AlertCard />
-            <AuthForm />
-            <div className='w-1/2 p-12 rounded-lg h-96 overflow-hidden'>
-                <img className='w-full' src={SignnupCover} alt="" />
+        <section className='w-screen h-screen bg-black  justify-between flex items-start'>
+            <Margin border="right" />
+            <div className="flex flex-col w-full items-start justify-center">
+                <Navbar />
+                <div className={`${edge.bottom} w-full flex justify-center items-center h-fit px-6 py-2`}>
+                    <h5 className="text-white w-fit text-xl flex-col font-bold">Get your Own Vault {<span>by Becoming part of the family </span>}</h5>
+                </div>
             </div>
+            <Margin border="left" />
         </section>
     )
 }
