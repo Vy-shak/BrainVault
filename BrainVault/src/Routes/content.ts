@@ -19,7 +19,8 @@ declare module 'express-serve-static-core' {
 
 
 //@ts-ignore
-contentRouter.use(authMiddleware)
+contentRouter.use(authMiddleware);
+
 
 
 contentRouter.get("/show", async (req: Request, res: Response) => {
@@ -69,8 +70,10 @@ contentRouter.post("/add", async (req: Request, res: Response) => {
     const linktype: string = req.body.linktype;
     const linkname: string = req.body.linkname;
     const about: string = req.body.about;
-    let link: string = req.body.link;
+    let link: string = req.body.link!;
     const id: string = req.id!;
+
+
 
     function Urltoembed(url: string) {
         const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|v\/|embed\/|.+&v=))([^&\s?]+)/);
@@ -79,14 +82,17 @@ contentRouter.post("/add", async (req: Request, res: Response) => {
             const videoId = match[1];
             return `https://www.youtube.com/embed/${videoId}`;
         } else {
-            throw new Error("Invalid YouTube link");
+            // throw new Error("Invalid YouTube link");
+            console.log("some error babe")
         }
     };
 
     if (linktype === 'Youtube') {
-        link = Urltoembed(link);
+        if (link) {
+            //@ts-ignore
+            link = Urltoembed(link);
+        }
     }
-    else { link = Urltoembed(link) }
 
     try {
         const upload = await contentmodel.create({

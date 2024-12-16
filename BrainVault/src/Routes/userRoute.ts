@@ -3,7 +3,7 @@ import { userModel } from "../Schemas/userSchema";
 import mongoose, { Types } from "mongoose";
 import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
-import z, { string } from 'zod';
+import { inputValidation } from "../Middlewares/zodValidation";
 import bcrypt from "bcrypt"
 
 const userRouter = Router();
@@ -18,7 +18,11 @@ userRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
     const password: string = req.body.password;
     const fullname: string = req.body.fullname;
 
+
+    const inputVal = inputValidation.safeParse({ username, password, fullname })
+
     console.log("one", username, 'two', password, 'three', fullname)
+
 
     if (!password) {
         res.status(401).send({
@@ -27,16 +31,25 @@ userRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
         return
     };
 
-    const checkdupli = await userModel.findOne({
-        username: username
-    });
+    if (inputVal.success) {
+        const checkdupli = await userModel.findOne({
+            username: username
+        });
 
-    if (checkdupli) {
+        if (checkdupli) {
+            res.send({
+                err: "this username is taken"
+            });
+            return
+        }
+    }
+    else {
         res.send({
-            err: "this username is taken"
+            msg: "input Validation error"
         });
         return
     }
+
 
 
 
