@@ -8,7 +8,7 @@ const fetchData = async (setterfn: (data: any) => void, linktype: string) => {
             headers: {
                 'Content-Type': 'application/json',
                 'token': token,
-                'linktype': linktype
+                'linktype': linktype,
             }
         });
         const data = await response.data.details;

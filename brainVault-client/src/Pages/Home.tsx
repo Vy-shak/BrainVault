@@ -32,17 +32,18 @@ function Home() {
     }
 
     return (
-        <section className="w-screen  pl-2 pt-2 items-start h-full overflow-x-hidden flex">
+        <section className="w-screen pt-2 items-start h-full overflow-x-hidden flex">
+            <div className="fixed top-0 w-full bg-white h-7">Navbar</div>
             <ShareModel share={share} setShare={handleShare} />
             <Modal />
             {/* <span className="absolute left-52 top-10 font-semibold text-2xl">Hello Yshak, Welcome!</span> */}
-            <div className="flex-col">
+            <div className="flex-col mt-12">
                 <Sidebar />
                 <div className="h-screen rounded-md -mt-2 w-full bg-white">
                 </div>
             </div>
             <Outlet />
-            <Button handleClick={handleShare} variant="primary" size="sm" text="Share brain" defaultCss="fixed top-4 right-6 " startIcon={<IconShare />} />
+            <Button handleClick={handleShare} variant="primary" size="sm" text="Share brain" defaultCss="fixed top-10 right-6 " startIcon={<IconShare />} />
             <Addfile setOpen={openOnly} />
 
         </section >

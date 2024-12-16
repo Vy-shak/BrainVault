@@ -43,8 +43,8 @@ function CardAll() {
         deleteCard()
     }, [isDelete]);
 
-    const linktype = params.linktype;
-    console.log(linktype)
+    const linktype = params.linktype!;
+    
     useEffect(() => {
         fetchData(setLinkdata, linktype)
     }, [open, isDelete]);

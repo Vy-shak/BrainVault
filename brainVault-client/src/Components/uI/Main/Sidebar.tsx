@@ -51,11 +51,11 @@ function Sidebar() {
     ]
 
     return (
-        <section style={{ transition: "all 200ms ease-out" }} className={`bg-white ${minimize ? "w-12" : "w-40"} transition flex-grow pt-3 duration-150 ease-out h-full rounded-md flex-col flex justify-start items-start`}>
+        <section style={{ transition: "all 200ms ease-out" }} className={`bg-white ${minimize ? "w-12" : "w-40"} transition flex-grow pt-3 mt-12 duration-150 ease-out h-full rounded-md flex-col flex justify-start items-start`}>
             <div onClick={handleMinimize} className="flex w-full justify-end items-center h-full rounded-md pr-3">
                 <Close />
             </div>
-            <div className="m-0 w-full h-full py-3">
+            <div className=" w-full h-full py-3">
                 {sideData.map((item, index) => (
                     <Sideitem key={index} minimize={minimize} text={item.text} startIcon={item.icon} type="normal" />
                 ))}
