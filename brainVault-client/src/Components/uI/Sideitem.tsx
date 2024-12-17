@@ -1,11 +1,15 @@
+import { li, tr, ul } from "motion/react-client"
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
+import Sideitem2 from "./Sideitem2"
+import { useRef } from "react"
 
 interface sideProp {
     type: 'selected' | 'normal'
     startIcon?: any,
     text: string,
-    minimize: boolean
+    minimize: boolean,
+    data1: any
 };
 
 const menuCss = {
@@ -16,16 +20,15 @@ const menuCss = {
 const defaultCss = ' justify-start flex w-full h-10 items-center text-sm space-x-2'
 
 function Sideitem(props: sideProp) {
-
+    const [open, setOpen] = useState(false)
     return (
-        <NavLink to={`/home/${props.text}`} className={({ isActive }) => isActive ? `${defaultCss} ${menuCss[props.type]} bg-Bblue500 text-white` : `${defaultCss} ${menuCss[props.type]} hover:bg-gray-300`}>
-            <div className={`${defaultCss}`}>
-                <div>
-                    {props.startIcon}
-                </div>
-                <span>{`${props.minimize ? "" : props.text}`}</span>
-            </div>
-        </NavLink>
+        props.data1.map((item) => (
+            <li>
+                <span onClick={() => setOpen((prev) => !prev)} className="text-white">{">"}</span>
+                <span className="text-white">{item.name}</span>
+                {item.child ? <Sideitem2 open={open} data1={item.child} /> : null}
+            </li>
+        ))
     )
 }
 
