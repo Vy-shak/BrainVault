@@ -16,17 +16,16 @@ userRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
 
     const username: string = req.body.username;
     const password: string = req.body.password;
-    const fullname: string = req.body.fullname;
+    const firstname: string = req.body.firstname;
+    const lastname: string = req.body.firstname;
 
 
-    const inputVal = inputValidation.safeParse({ username, password, fullname })
-
-    console.log("one", username, 'two', password, 'three', fullname)
+    const inputVal = inputValidation.safeParse({ username, password, firstname, lastname })
 
 
     if (!password) {
         res.status(401).send({
-            err: "password is not correct"
+            err: "Please type a valid password"
         });
         return
     };
@@ -37,15 +36,15 @@ userRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
         });
 
         if (checkdupli) {
-            res.send({
+            res.status(401).send({
                 err: "this username is taken"
             });
             return
         }
     }
     else {
-        res.send({
-            msg: "input Validation error"
+        res.status(401).send({
+            err: "input Validation error"
         });
         return
     }
@@ -59,11 +58,12 @@ userRouter.post('/signup', async (req: Request, res: Response): Promise<void> =>
     try {
         const addData = await userModel.create({
             username: username,
-            fullname: fullname,
+            firstname: firstname,
+            lastname: lastname,
             password: hashPass
         });
     } catch (err) {
-        res.status(406).send({
+        res.status(401).send({
             err: "error in adding data to db",
             err1: err
         });
@@ -88,11 +88,11 @@ userRouter.post('/signin', async (req: any, res: any) => { //fix any
 
     interface checkT extends bodyT {
         _id: mongoose.Types.ObjectId,
-        fullname: string
+        firstname: string,
+        lastname: string
     }
 
     const { username, password }: bodyT = req.body;
-    console.log(username, password)
 
     let secret: string = process.env.JWT_SECRET!;
 

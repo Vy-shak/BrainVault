@@ -2,7 +2,7 @@ import z from "zod";
 
 export const inputValidation = z.object({
     username: z.string().min(4).max(16),
-    fullname: z.string().min(4).max(26),
+    firstname: z.string().min(4).max(26),
     password: z.string().min(5).max(16).superRefine((val, ctx) => {
         const regxnum = /[1-9]/;
         if (!regxnum.test(val)) {
