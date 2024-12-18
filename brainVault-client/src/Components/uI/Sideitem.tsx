@@ -9,7 +9,8 @@ interface sideProp {
     startIcon?: any,
     text: string,
     minimize: boolean,
-    data1: any
+    data1: any,
+    setdata1: any,
 };
 
 const menuCss = {
@@ -20,12 +21,16 @@ const menuCss = {
 const defaultCss = ' justify-start flex w-full h-10 items-center text-sm space-x-2'
 
 function Sideitem(props: sideProp) {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const handleClick = () => {
+        props.setdata1((prev: any) => [...prev, { name: "hello", child: [] }])
+    }
     return (
         props.data1.map((item) => (
             <li>
                 <span onClick={() => setOpen((prev) => !prev)} className="text-white">{">"}</span>
                 <span className="text-white">{item.name}</span>
+                <span onClick={handleClick} className="text-white">{"+"}</span>
                 {item.child ? <Sideitem2 open={open} data1={item.child} /> : null}
             </li>
         ))

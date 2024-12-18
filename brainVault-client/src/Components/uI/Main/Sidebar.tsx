@@ -30,7 +30,8 @@ function Sidebar() {
             level: 0,
             links: ["link0.1"],
             child: []
-        }
+        },
+
 
     ])
     const [minimize, setMinimize] = useState(false);
@@ -46,7 +47,7 @@ function Sidebar() {
                 <Close />
             </div>
             <ul className=" w-full h-full py-3">
-                <Sideitem minimize={minimize} data1={sideData} type="normal" />
+                <Sideitem minimize={minimize} data1={sideData} setdata1={setSideData} type="normal" />
             </ul>
         </section>
     )

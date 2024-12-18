@@ -16,7 +16,7 @@ const edge = {
 
 function Margin({ border }: border) {
     return (
-        <div className={`${edge[border]} bg-black h-screen w-11`}>
+        <div className={`${edge[border]} bg-black h-screen overflow-auto w-11`}>
         </div>
     )
 }

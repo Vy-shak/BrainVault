@@ -15,9 +15,9 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" >
-          <Route path="Signup" element={<Signup />} />
+          <Route path="signup" element={<Signup />} />
           <Route path="/" element={<Landing />} />
-          <Route path="Login" element={<Login />} />
+          <Route path="signin" element={<Login />} />
           <Route path='/home' element={<Home />}>
             <Route path='/home/:linktype' element={<CardAll />} />
           </Route>
