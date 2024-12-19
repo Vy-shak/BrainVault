@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { authMiddleware } from "../Middlewares/authMware";
 import { shareModel } from "../Schemas/shareSchema";
-import { contentmodel } from "../Schemas/contentschema";
+import { folderModel } from "../Schemas/folderSchema";
 import dotenv from "dotenv"
 
 
@@ -73,7 +73,7 @@ shareRouter.get('/show/:shareLink', async (req, res) => {
 
         if (item) {
             try {
-                const content = await contentmodel.find({
+                const content = await folderModel.find({
                     userId: item.userId
                 });
 
